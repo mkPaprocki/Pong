@@ -23,7 +23,7 @@ public class Paddle extends Rectangle {
     public void move() {
         if ((this.getMinY() < 0 && getyDirection() < 0) || (this.getMaxY() >= GAME_HEIGHT && getyDirection() > 0))
             setYDirection(0);
-        this.move((int) this.getX(), (int) this.getY() + getyDirection());
+        this.translate(0, getyDirection());
     }
 
     public void draw(Graphics g) {

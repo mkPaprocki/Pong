@@ -11,6 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int GAME_WIDTH = 1000;
     public static final int GAME_HEIGHT = (int) (GAME_WIDTH * (5 / 9f));
     public static final int BALL_SIZE = 20;
+    public static final int PADDLE_SPEED = 5;
     public final Dimension screenSize;
     private final transient Thread gameThread;
     private Score score;
@@ -109,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
-            if (delta >= 1) {
+            if (delta >= PADDLE_SPEED) {
                 synchronized (this) {
                     move();
                     repaint();
@@ -125,21 +126,21 @@ public class GamePanel extends JPanel implements Runnable {
 
         @Override
         public void keyTyped(KeyEvent keyEvent) {
-            //omit does nothing
+            //does nothing
         }
 
         @Override
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_A) {
-                paddle1.setYDirection(-1);
+                paddle1.setYDirection(-PADDLE_SPEED);
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_Z) {
-                paddle1.setYDirection(1);
+                paddle1.setYDirection(PADDLE_SPEED);
             }
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_K) {
-                paddle2.setYDirection(-1);
+                paddle2.setYDirection(-PADDLE_SPEED);
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_M) {
-                paddle2.setYDirection(1);
+                paddle2.setYDirection(PADDLE_SPEED);
             }
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_Q) {
